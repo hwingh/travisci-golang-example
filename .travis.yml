@@ -6,5 +6,12 @@ go:
   - "1.10.x"
   - tip
 
+before_script:
+  - go fmt ./...
+  - go vet $(go list ./...)
+
 script:
-  - go test -v ./...
+  - sh testAndCodecoverage.sh
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
