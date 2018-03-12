@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -21,5 +22,16 @@ func TestSum(t *testing.T) {
 		if total != table.n {
 			t.Errorf("Sum of (%d+%d) was incorrect, got %d, want: %d.", table.x, table.y, total, table.n)
 		}
+	}
+}
+
+func ExampleSum() {
+	fmt.Println(Sum(5, 5))
+	//Output: 10
+}
+
+func BenchmarkSum(b *testing.B) {
+	for index := 0; index < b.N; index++ {
+		Sum(1, 2)
 	}
 }
