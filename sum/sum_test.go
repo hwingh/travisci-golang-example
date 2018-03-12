@@ -35,3 +35,17 @@ func BenchmarkSum(b *testing.B) {
 		Sum(1, 2)
 	}
 }
+
+func TestSumAll(t *testing.T) {
+	t.Run("[1, 2, 3, 4, 5]", testSumAllFunc([]int{1, 2, 3, 4, 5}, 15))
+	t.Run("[1, 2, 3, 4, -5]", testSumAllFunc([]int{1, 2, 3, 4, -5}, 5))
+}
+
+func testSumAllFunc(numbers []int, expected int) func(*testing.T) {
+	return func(t *testing.T) {
+		actual := SumAll(numbers)
+		if actual != expected {
+			t.Errorf("Expected the sum of %v to be %d but instead got %d", numbers, expected, actual)
+		}
+	}
+}
